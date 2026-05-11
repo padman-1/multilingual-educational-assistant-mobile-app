@@ -26,6 +26,7 @@ class CustomDropdown extends StatelessWidget {
           labelStyle: TextStyle(
             color: AppColors.arrivalBackground,
             fontWeight: FontWeight.w900,
+            fontSize: 18,
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),

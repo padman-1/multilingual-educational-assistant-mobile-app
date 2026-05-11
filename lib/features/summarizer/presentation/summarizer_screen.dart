@@ -6,7 +6,6 @@ import 'package:multilingual_educational_assitant_mobile_app/shared/utils/valida
 import 'package:multilingual_educational_assitant_mobile_app/shared/widgets/custom_button.dart';
 import 'package:multilingual_educational_assitant_mobile_app/shared/widgets/custom_placeholder.dart';
 import 'package:multilingual_educational_assitant_mobile_app/shared/widgets/custom_textfield.dart';
-import 'package:multilingual_educational_assitant_mobile_app/shared/widgets/error_dialog.dart';
 import 'package:multilingual_educational_assitant_mobile_app/shared/widgets/output_container.dart';
 import 'package:multilingual_educational_assitant_mobile_app/shared/widgets/top_error_snackbar.dart';
 

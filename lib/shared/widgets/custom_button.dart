@@ -40,7 +40,7 @@ class CustomButton extends StatelessWidget {
               )
             : Text(
                 text,
-                style: GoogleFonts.lato(
+                style: GoogleFonts.prata(
                   textStyle: const TextStyle(
                     fontSize: 15,
                     color: Colors.white,

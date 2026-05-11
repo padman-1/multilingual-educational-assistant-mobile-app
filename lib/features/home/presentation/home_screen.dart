@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:multilingual_educational_assitant_mobile_app/features/full_pipeline/presentation/pipeline_screen.dart';
 import 'package:multilingual_educational_assitant_mobile_app/features/summarizer/presentation/summarizer_screen.dart';
 import 'package:multilingual_educational_assitant_mobile_app/features/text_to_speech/presentation/tts_screen.dart';
@@ -22,9 +23,15 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
+            Text(
               "What do you want to do today?",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: GoogleFonts.prata(
+                textStyle: const TextStyle(
+                  fontSize: 19,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
 
             const SizedBox(height: 50),

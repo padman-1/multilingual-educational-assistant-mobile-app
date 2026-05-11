@@ -84,6 +84,7 @@ class _TTSScreenState extends State<TTSScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final devSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(title: const Text("Text to Speech")),
       backgroundColor: AppColors.background,
@@ -135,39 +136,54 @@ class _TTSScreenState extends State<TTSScreen> {
                       ),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        icon: Icon(
-                          _isPlaying ? Icons.pause : Icons.play_arrow,
-                          color: AppColors.arrivalBackground,
+                  Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    width: devSize.width / 2,
+                    decoration: BoxDecoration(
+                      color: AppColors.surface,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: AppColors.onBackground,
+                        width: 0.3,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            _isPlaying ? Icons.pause : Icons.play_arrow,
+                            color: AppColors.arrivalBackground,
+                            size: 34,
+                          ),
+                          onPressed: () async {
+                            if (_isPlaying) {
+                              await _audioService.pause();
+                              setState(() => _isPlaying = false);
+                            } else {
+                              setState(() => _isPlaying = true);
+                              await _audioService.play();
+                            }
+                          },
                         ),
-                        onPressed: () async {
-                          if (_isPlaying) {
+                        SizedBox(width: 15),
+                        IconButton(
+                          icon: const Icon(
+                            Icons.stop,
+                            color: AppColors.arrivalBackground,
+                            size: 30,
+                          ),
+                          onPressed: () async {
                             await _audioService.pause();
-                            setState(() => _isPlaying = false);
-                          } else {
-                            setState(() => _isPlaying = true);
-                            await _audioService.play();
-                          }
-                        },
-                      ),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.stop,
-                          color: AppColors.arrivalBackground,
-                        ),
-                        onPressed: () async {
-                          await _audioService.pause();
-                          await _audioService.seekToStart();
+                            await _audioService.seekToStart();
 
-                          setState(() {
-                            _isPlaying = false;
-                          });
-                        },
-                      ),
-                    ],
+                            setState(() {
+                              _isPlaying = false;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ],
 

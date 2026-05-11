@@ -86,7 +86,16 @@ class _TranslationScreenState extends State<TranslationScreen> {
                     hint: "Enter text to translate...",
                   ),
 
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 50),
+
+                  // LANGUAGE DROPDOWN
+                  CustomDropdown(
+                    label: "Select Language",
+                    value: _selectedLanguageName,
+                    items: supportedLanguages.keys.toList(),
+                    onChanged: (val) =>
+                        setState(() => _selectedLanguageName = val!),
+                  ),
 
                   if (_isLoading) ...[
                     const SizedBox(height: 20),
@@ -100,7 +109,7 @@ class _TranslationScreenState extends State<TranslationScreen> {
 
                     const LoadingPlaceholder(),
                   ] else if (_result.isNotEmpty) ...[
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 30),
                     Text(
                       "Translated Text",
                       style: GoogleFonts.acme(
@@ -113,16 +122,6 @@ class _TranslationScreenState extends State<TranslationScreen> {
                     ),
                     OutputContainer(result: _result),
                   ],
-                  const SizedBox(height: 20),
-
-                  // LANGUAGE DROPDOWN
-                  CustomDropdown(
-                    label: "Select Language",
-                    value: _selectedLanguageName,
-                    items: supportedLanguages.keys.toList(),
-                    onChanged: (val) =>
-                        setState(() => _selectedLanguageName = val!),
-                  ),
 
                   const SizedBox(height: 50),
 

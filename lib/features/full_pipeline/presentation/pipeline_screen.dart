@@ -10,8 +10,6 @@ import 'package:multilingual_educational_assitant_mobile_app/shared/widgets/cust
 import 'package:multilingual_educational_assitant_mobile_app/shared/widgets/custom_dropdown.dart';
 import 'package:multilingual_educational_assitant_mobile_app/shared/widgets/custom_placeholder.dart';
 import 'package:multilingual_educational_assitant_mobile_app/shared/widgets/custom_textfield.dart';
-import 'package:multilingual_educational_assitant_mobile_app/shared/widgets/error_dialog.dart';
-import 'package:multilingual_educational_assitant_mobile_app/shared/widgets/loading_overlay.dart';
 import 'package:multilingual_educational_assitant_mobile_app/shared/widgets/output_container.dart';
 import 'package:multilingual_educational_assitant_mobile_app/shared/widgets/top_error_snackbar.dart';
 
@@ -122,6 +120,7 @@ class _PipelineScreenState extends State<PipelineScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final devSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(title: const Text("Smart Assistant")),
       backgroundColor: AppColors.background,
@@ -186,7 +185,7 @@ class _PipelineScreenState extends State<PipelineScreen> {
                           setState(() => _selectedLanguageName = val!),
                     ),
 
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 30),
 
                   // SPEAKER (only if TTS)
                   if (_doTTS)
@@ -212,13 +211,6 @@ class _PipelineScreenState extends State<PipelineScreen> {
                   // RESULT
                   if (_isLoading) ...[
                     const SizedBox(height: 20),
-                    const Text(
-                      "summarizing...",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.onBackground,
-                      ),
-                    ),
 
                     const LoadingPlaceholder(),
                   ] else if (_summary.isNotEmpty) ...[
@@ -265,35 +257,47 @@ class _PipelineScreenState extends State<PipelineScreen> {
                         ),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          icon: Icon(
-                            _isPlaying ? Icons.pause : Icons.play_arrow,
+                    Container(
+                      margin: const EdgeInsets.only(top: 10),
+                      width: devSize.width / 2,
+                      decoration: BoxDecoration(
+                        color: AppColors.surface,
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                          color: AppColors.onBackground,
+                          width: 0.3,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              _isPlaying ? Icons.pause : Icons.play_arrow,
+                            ),
+                            onPressed: () async {
+                              if (_isPlaying) {
+                                await _audioService.pause();
+                                setState(() => _isPlaying = false);
+                              } else {
+                                setState(() => _isPlaying = true);
+                                await _audioService.play();
+                              }
+                            },
                           ),
-                          onPressed: () async {
-                            if (_isPlaying) {
+                          IconButton(
+                            icon: const Icon(Icons.stop),
+                            onPressed: () async {
                               await _audioService.pause();
-                              setState(() => _isPlaying = false);
-                            } else {
-                              setState(() => _isPlaying = true);
-                              await _audioService.play();
-                            }
-                          },
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.stop),
-                          onPressed: () async {
-                            await _audioService.pause();
-                            await _audioService.seekToStart();
+                              await _audioService.seekToStart();
 
-                            setState(() {
-                              _isPlaying = false;
-                            });
-                          },
-                        ),
-                      ],
+                              setState(() {
+                                _isPlaying = false;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ],

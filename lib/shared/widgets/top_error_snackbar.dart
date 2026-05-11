@@ -35,7 +35,7 @@ class _CompactTopBarState extends State<_CompactTopBar>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 400),
+      duration: const Duration(milliseconds: 500),
       vsync: this,
     );
 
@@ -112,7 +112,7 @@ class _CompactTopBarState extends State<_CompactTopBar>
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w700,
                           decoration:
                               TextDecoration.none, // Removes yellow underline
                         ),

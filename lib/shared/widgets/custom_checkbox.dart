@@ -23,9 +23,13 @@ class CustomCheckbox extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: GoogleFonts.habibi(
-          textStyle: const TextStyle(fontSize: 14, color: Colors.black),
-        ), // fonts to try out : supermercadoOne, habibi
+        style: GoogleFonts.prata(
+          textStyle: const TextStyle(
+            fontSize: 14,
+            color: Colors.black,
+            fontWeight: FontWeight.w900,
+          ),
+        ), // fonts to try out : supermercadoOne, habibi, prata,
       ),
       value: value,
       onChanged: onChanged,
